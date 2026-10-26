@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AsistenteIA.Views.ChatPage"
+             Title="Consultar IA">
+
+    <Grid Padding="20" RowSpacing="12"
+          RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto">
+
+        <Label Text="Asistente académico de IA"
+               FontSize="26" FontAttributes="Bold" />
+
+        <Label Grid.Row="1"
+               Text="No ingrese datos personales, contraseñas ni información confidencial."
+               FontSize="12" TextColor="OrangeRed" />
+
+        <Picker Grid.Row="2"
+                Title="Seleccione una plantilla (opcional)"
+                ItemsSource="{Binding Templates}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedTemplate}"
+                SemanticProperties.Description="Selector de plantilla de prompt" />
+
+        <Editor Grid.Row="3"
+                Text="{Binding Prompt}"
+                Placeholder="Escriba una consulta académica"
+                AutoSize="TextChanges"
+                MinimumHeightRequest="90"
+                MaximumHeightRequest="160"
+                SemanticProperties.Description="Campo para escribir la consulta" />
+
+        <Grid Grid.Row="4" ColumnDefinitions="*,*,*" ColumnSpacing="10">
+            <Button Text="Consultar"
+                    Command="{Binding AskCommand}"
+                    SemanticProperties.Description="Enviar consulta a la IA" />
+            <Button Grid.Column="1" Text="Cancelar"
+                    Command="{Binding CancelCommand}"
+                    SemanticProperties.Description="Cancelar consulta en curso" />
+            <Button Grid.Column="2" Text="Guardar"
+                    Command="{Binding SaveCommand}"
+                    SemanticProperties.Description="Guardar respuesta en el historial" />
+        </Grid>
+
+        <ScrollView Grid.Row="5">
+            <Label Text="{Binding Answer}" LineBreakMode="WordWrap"
+                   SemanticProperties.Description="Respuesta de la IA" />
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="6" Spacing="6">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+            <Label Text="{Binding StatusMessage}" FontSize="12" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

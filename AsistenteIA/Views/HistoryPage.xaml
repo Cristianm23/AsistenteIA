@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AsistenteIA.ViewModels"
+             x:Class="AsistenteIA.Views.HistoryPage"
+             Title="Historial">
+
+    <Grid Padding="16" RowSpacing="10" RowDefinitions="Auto,*">
+
+        <SearchBar Placeholder="Buscar en el historial"
+                   Text="{Binding SearchText}"
+                   SemanticProperties.Description="Buscar consultas guardadas" />
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Records}">
+
+            <CollectionView.EmptyView>
+                <Label Text="Sin consultas guardadas"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="12" Margin="0,0,0,10" StrokeThickness="1">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=OpenDetailCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="{Binding Prompt}"
+                                       FontAttributes="Bold"
+                                       MaxLines="2"
+                                       LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding CreatedAt, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
+                                       FontSize="12" />
+                                <Label Text="{Binding Category}" FontSize="12" />
+                                <Label Text="✔ Verificada" FontSize="12"
+                                       IsVisible="{Binding IsVerified}" />
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="1" Text="Eliminar"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                    SemanticProperties.Description="Eliminar esta consulta del historial" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

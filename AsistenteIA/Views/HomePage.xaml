@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AsistenteIA.Views.HomePage"
+             Title="Inicio">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label Text="AsistenteIA"
+                   FontSize="30" FontAttributes="Bold"
+                   SemanticProperties.HeadingLevel="Level1" />
+
+            <Label Text="Asistente académico con inteligencia artificial. Escribe una consulta, elige una plantilla si lo deseas, recibe una respuesta y guárdala en tu historial local."
+                   FontSize="16" LineBreakMode="WordWrap" />
+
+            <Label Text="Recomendaciones de uso"
+                   FontSize="20" FontAttributes="Bold"
+                   SemanticProperties.HeadingLevel="Level2" />
+
+            <Label Text="• Sé claro y específico en tus preguntas."
+                   LineBreakMode="WordWrap" />
+            <Label Text="• Verifica siempre la respuesta con fuentes confiables: la IA puede equivocarse o inventar datos."
+                   LineBreakMode="WordWrap" />
+            <Label Text="• No ingreses datos personales, contraseñas ni información confidencial."
+                   LineBreakMode="WordWrap" />
+            <Label Text="• Configura tu clave de la API en la pestaña Configuración antes de consultar."
+                   LineBreakMode="WordWrap" />
+
+            <Button Text="Ir a Consultar"
+                    Command="{Binding GoToChatCommand}"
+                    SemanticProperties.Description="Abrir la pantalla de consulta a la IA" />
+
+            <Button Text="Ver historial"
+                    Command="{Binding GoToHistoryCommand}"
+                    SemanticProperties.Description="Abrir el historial de consultas guardadas" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
