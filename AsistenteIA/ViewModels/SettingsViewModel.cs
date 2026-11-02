@@ -44,13 +44,28 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private async Task SaveKeyAsync()
     {
-        if (string.IsNullOrWhiteSpace(ApiKeyInput))
+        string key = ApiKeyInput.Trim();
+
+        if (string.IsNullOrWhiteSpace(key))
         {
             StatusMessage = "Escriba la clave antes de guardar.";
             return;
         }
 
-        await _keyService.SaveAsync(ApiKeyInput);
+        // Solo caracteres ASCII visibles, sin espacios ni símbolos especiales
+        if (key.Any(c => c < 33 || c > 126))
+        {
+            StatusMessage = "La clave tiene caracteres no válidos (por ejemplo '…' o espacios). Copie la clave completa.";
+            return;
+        }
+
+        if (!key.StartsWith("sk_") && !key.StartsWith("pk_"))
+        {
+            StatusMessage = "La clave debe empezar con sk_ o pk_.";
+            return;
+        }
+
+        await _keyService.SaveAsync(key);
         ApiKeyInput = string.Empty;   // limpia el campo, la clave no queda en pantalla
         await RefreshKeyStatusAsync();
         StatusMessage = "Clave guardada de forma segura.";
@@ -115,7 +130,9 @@ public partial class SettingsViewModel : ObservableObject
             StatusMessage = ex.StatusCode is System.Net.HttpStatusCode.Unauthorized
                                 or System.Net.HttpStatusCode.Forbidden
                 ? "Error de autorización: revise su clave."
-                : $"Error del servicio: {(int?)ex.StatusCode ?? 0}";
+                : ex.StatusCode is null
+                    ? $"No se pudo conectar: {ex.InnerException?.Message ?? ex.Message}"
+                    : $"Error del servicio: {(int)ex.StatusCode}";
         }
         catch (InvalidOperationException ex)
         {
