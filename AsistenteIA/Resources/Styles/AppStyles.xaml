@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Colores de aviso con buen contraste en modo claro y oscuro -->
+    <Color x:Key="AvisoLight">#C2410C</Color>
+    <Color x:Key="AvisoDark">#FDBA74</Color>
+
+    <!-- Título principal de cada pantalla -->
+    <Style x:Key="TituloPagina" TargetType="Label">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="SemanticProperties.HeadingLevel" Value="Level1" />
+    </Style>
+
+    <!-- Subtítulo de sección -->
+    <Style x:Key="TituloSeccion" TargetType="Label">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="SemanticProperties.HeadingLevel" Value="Level2" />
+    </Style>
+
+    <!-- Texto de apoyo (fechas, estados) -->
+    <Style x:Key="TextoSecundario" TargetType="Label">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+    </Style>
+
+    <!-- Avisos de privacidad y verificación -->
+    <Style x:Key="AvisoLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource AvisoLight}, Dark={StaticResource AvisoDark}}" />
+    </Style>
+
+    <!-- Tarjeta del historial -->
+    <Style x:Key="Tarjeta" TargetType="Border">
+        <Setter Property="Padding" Value="12" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Stroke"
+                Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="8" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

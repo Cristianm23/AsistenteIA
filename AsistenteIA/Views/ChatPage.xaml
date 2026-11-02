@@ -7,12 +7,12 @@
     <Grid Padding="20" RowSpacing="12"
           RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto">
 
-        <Label Text="Asistente académico de IA"
-               FontSize="26" FontAttributes="Bold" />
+        <Label Text="Asistente académico de IA" Style="{StaticResource TituloPagina}" />
+
 
         <Label Grid.Row="1"
-               Text="No ingrese datos personales, contraseñas ni información confidencial."
-               FontSize="12" TextColor="OrangeRed" />
+                Text="No ingrese datos personales, contraseñas ni información confidencial."
+                Style="{StaticResource AvisoLabel}" />
 
         <Picker Grid.Row="2"
                 Title="Seleccione una plantilla (opcional)"
@@ -49,7 +49,7 @@
         <VerticalStackLayout Grid.Row="6" Spacing="6">
             <ActivityIndicator IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}" />
-            <Label Text="{Binding StatusMessage}" FontSize="12" />
+            <Label Text="{Binding StatusMessage}" Style="{StaticResource TextoSecundario}" />
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

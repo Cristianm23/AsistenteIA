@@ -3,6 +3,71 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AsistenteIA.Views.SettingsPage"
              Title="Configuración">
-    <Label Text="Configuración (próximamente)"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+            <Label Text="Clave de la API" FontSize="20" FontAttributes="Bold"
+                   SemanticProperties.HeadingLevel="Level2" />
+
+            <Label Text="{Binding KeyStatus}" />
+
+            <Entry Text="{Binding ApiKeyInput}"
+                   IsPassword="True"
+                   Placeholder="Pegue aquí su clave publicable"
+                   SemanticProperties.Description="Campo para la clave de la API" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Text="Guardar clave"
+                        Command="{Binding SaveKeyCommand}"
+                        SemanticProperties.Description="Guardar la clave de forma segura" />
+                <Button Grid.Column="1" Text="Eliminar clave"
+                        Command="{Binding DeleteKeyCommand}"
+                        SemanticProperties.Description="Eliminar la clave guardada" />
+            </Grid>
+
+            <Label Text="Modelo de IA" FontSize="20" FontAttributes="Bold"
+                   SemanticProperties.HeadingLevel="Level2" />
+
+            <Entry Text="{Binding SelectedModel}"
+                   Placeholder="Identificador del modelo"
+                   SemanticProperties.Description="Identificador del modelo de IA" />
+
+            <Button Text="Guardar modelo"
+                    Command="{Binding SaveModelCommand}" />
+
+            <Button Text="Probar conexión"
+                    Command="{Binding TestConnectionCommand}"
+                    SemanticProperties.Description="Probar la conexión con la API" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+            <Label Text="{Binding StatusMessage}" FontSize="13"
+                   LineBreakMode="WordWrap" />
+
+            <Label Text="No ingrese datos personales, contraseñas ni información confidencial en sus consultas."
+                   FontSize="12" TextColor="OrangeRed" LineBreakMode="WordWrap" />
+
+            <BoxView HeightRequest="1" />
+
+            <Label Text="Acerca de" FontSize="20" FontAttributes="Bold"
+                   SemanticProperties.HeadingLevel="Level2" />
+
+            <Label LineBreakMode="WordWrap"
+                   Text="Finalidad: AsistenteIA es una aplicación académica que envía consultas a un modelo de inteligencia artificial y guarda el historial en el dispositivo." />
+            <Label LineBreakMode="WordWrap"
+                   Text="Autoría: Proyecto final de Programación Avanzada y Aplicada, Universidad de San Buenaventura. Autores: Cristian Muñoz y Juan Higuera." />
+            <Label LineBreakMode="WordWrap"
+                   Text="Proveedor de la API: Pollinations (endpoint compatible con Chat Completions). El proveedor puede cambiar modelos, cuotas o autenticación." />
+            <Label LineBreakMode="WordWrap"
+                   Text="Fuentes técnicas: documentación de Microsoft Learn (.NET MAUI, HttpClient, inyección de dependencias) y documentación de Pollinations." />
+            <Label LineBreakMode="WordWrap"
+                   Text="Privacidad: las consultas y respuestas se guardan solo en este dispositivo. La clave se almacena con SecureStorage y nunca se muestra." />
+            <Label LineBreakMode="WordWrap"
+                   Text="Límites: la IA puede equivocarse o inventar información y no es una autoridad. Verifique siempre con fuentes confiables." />
+            <Label LineBreakMode="WordWrap"
+                   Text="Declaración de uso de IA: se utilizaron herramientas de inteligencia artificial como apoyo en el desarrollo; el equipo revisó y comprende el código." />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -20,7 +20,7 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="12" Margin="0,0,0,10" StrokeThickness="1">
+                    <Border Style="{StaticResource Tarjeta}"> 
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=OpenDetailCommand}"
