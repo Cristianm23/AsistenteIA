@@ -19,32 +19,7 @@ namespace AsistenteIA
                 });
 
 #if DEBUG
-    		builder.Services.AddSingleton(new HttpClient
-{
-    BaseAddress = new Uri("https://gen.pollinations.ai/v1/"),
-    Timeout = TimeSpan.FromSeconds(60)
-});
-
-            builder.Services.AddSingleton<ApiKeyService>();
-            builder.Services.AddSingleton<AiService>();
-            builder.Services.AddSingleton<DatabaseService>();
-            builder.Services.AddSingleton<ConnectivityService>();
-            builder.Services.AddTransient<ChatViewModel>();
-            builder.Services.AddTransient<ChatPage>();
-<<<<<<< HEAD
-<<<<<<< HEAD
-            builder.Services.AddTransient<HomeViewModel>();
-            builder.Services.AddTransient<HomePage>();
-            builder.Services.AddTransient<HistoryPage>();
-            builder.Services.AddTransient<SettingsPage>();
-            builder.Services.AddTransient<HistoryViewModel>();
-            builder.Services.AddTransient<DetailViewModel>();
-            builder.Services.AddTransient<DetailPage>();
-=======
->>>>>>> 86f367ab1867124d75df899afa5b3ed79adc90e3
-=======
->>>>>>> 86f367ab1867124d75df899afa5b3ed79adc90e3
-
+    		builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

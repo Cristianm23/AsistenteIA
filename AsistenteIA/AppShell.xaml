@@ -6,30 +6,9 @@
     xmlns:views="clr-namespace:AsistenteIA.Views"
     Title="AsistenteIA">
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<TabBar>
-		<ShellContent Title="Inicio"
-                      ContentTemplate="{DataTemplate views:HomePage}"
-                      Route="HomePage" />
-		<ShellContent Title="Consultar"
-                      ContentTemplate="{DataTemplate views:ChatPage}"
-                      Route="ChatPage" />
-		<ShellContent Title="Historial"
-                      ContentTemplate="{DataTemplate views:HistoryPage}"
-                      Route="HistoryPage" />
-		<ShellContent Title="Configuración"
-                      ContentTemplate="{DataTemplate views:SettingsPage}"
-                      Route="SettingsPage" />
-	</TabBar>
-=======
-	<ShellContent Title="Consultar"
-                  ContentTemplate="{DataTemplate views:ChatPage}"
-                  Route="ChatPage" />
->>>>>>> 86f367ab1867124d75df899afa5b3ed79adc90e3
-=======
-	<ShellContent Title="Consultar"
-                  ContentTemplate="{DataTemplate views:ChatPage}"
-                  Route="ChatPage" />
->>>>>>> 86f367ab1867124d75df899afa5b3ed79adc90e3
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
 </Shell>
