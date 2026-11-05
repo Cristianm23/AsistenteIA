@@ -8,6 +8,7 @@ namespace AsistenteIA.ViewModels;
 
 public partial class ChatViewModel : ObservableObject
 {
+    private const int MaxPromptLength = 120;
     private readonly AiService _aiService;
     private readonly DatabaseService _db;
     private readonly ConnectivityService _connectivity;
@@ -15,6 +16,7 @@ public partial class ChatViewModel : ObservableObject
 
     [ObservableProperty] private string prompt = string.Empty;
     [ObservableProperty] private string answer = string.Empty;
+    public FormattedString FormattedAnswer { get; } = new();
     [ObservableProperty] private string statusMessage = string.Empty;
     [ObservableProperty] private bool isBusy;
     [ObservableProperty] private string selectedModel;
@@ -40,10 +42,62 @@ public partial class ChatViewModel : ObservableObject
             Prompt = value.Text;
     }
 
+    partial void OnAnswerChanged(string value)
+    {
+        FormattedAnswer.Spans.Clear();
+        AddFormattedAnswerSpans(value);
+        OnPropertyChanged(nameof(FormattedAnswer));
+    }
+
+    private void AddFormattedAnswerSpans(string text)
+    {
+        int position = 0;
+
+        while (position < text.Length)
+        {
+            int opening = text.IndexOf("**", position, StringComparison.Ordinal);
+            if (opening < 0)
+            {
+                AddSpan(text[position..]);
+                break;
+            }
+
+            if (opening > position)
+                AddSpan(text[position..opening]);
+
+            int closing = text.IndexOf("**", opening + 2, StringComparison.Ordinal);
+            if (closing < 0)
+            {
+                AddSpan(text[opening..]);
+                break;
+            }
+
+            FormattedAnswer.Spans.Add(new Span
+            {
+                Text = text[(opening + 2)..closing],
+                FontAttributes = FontAttributes.Bold
+            });
+
+            position = closing + 2;
+        }
+    }
+
+    private void AddSpan(string text)
+    {
+        if (!string.IsNullOrEmpty(text))
+            FormattedAnswer.Spans.Add(new Span { Text = text });
+    }
+
     [RelayCommand]
     private async Task AskAsync()
     {
         if (IsBusy) return;
+
+        if (Prompt.Trim().Length > MaxPromptLength)
+        {
+            StatusMessage = $"La consulta no puede superar {MaxPromptLength} caracteres.";
+            return;
+        }
 
         if (!_connectivity.HasInternet())
         {

@@ -25,6 +25,7 @@
                 Text="{Binding Prompt}"
                 Placeholder="Escriba una consulta académica"
                 AutoSize="TextChanges"
+                MaxLength="120"
                 MinimumHeightRequest="90"
                 MaximumHeightRequest="160"
                 SemanticProperties.Description="Campo para escribir la consulta" />
@@ -42,7 +43,7 @@
         </Grid>
 
         <ScrollView Grid.Row="5">
-            <Label Text="{Binding Answer}" LineBreakMode="WordWrap"
+            <Label FormattedText="{Binding FormattedAnswer}" LineBreakMode="WordWrap"
                    SemanticProperties.Description="Respuesta de la IA" />
         </ScrollView>
 

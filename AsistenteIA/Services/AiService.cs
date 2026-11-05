@@ -22,8 +22,8 @@ public class AiService
         string cleanPrompt = prompt.Trim();
         if (cleanPrompt.Length < 5)
             throw new ArgumentException("La consulta es demasiado corta.");
-        if (cleanPrompt.Length > 2000)
-            throw new ArgumentException("La consulta supera 2000 caracteres.");
+        if (cleanPrompt.Length > 120)
+            throw new ArgumentException("La consulta no puede superar 120 caracteres.");
 
         // 2. Clave desde SecureStorage
         string? apiKey = await _keyService.GetAsync();
